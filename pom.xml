@@ -27,13 +27,16 @@
                 <scope>import</scope>
             </dependency>           
             <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-arq</artifactId>
-            </dependency>
-                 <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-core</artifactId>
-            </dependency>
+              <groupId>org.apache.jena</groupId>
+              <artifactId>jena-arq</artifactId>
+              <version>${apache-jena.version}</version>
+           </dependency>
+            <dependency>
+              <groupId>org.apache.jena</groupId>
+              <artifactId>jena-core</artifactId>
+              <version>${apache-jena.version}</version>
+          </dependency>
+
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -46,24 +49,20 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-       <dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-arq</artifactId>
+        </dependency>
+        <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-core</artifactId>
-                 <version>${apache-jena.version}</version>
-        </dependency>
-         <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-arq</artifactId>
-                 <version>${apache-jena.version}</version>
-        </dependency>
     </dependencies>
-
-
 
     <build>
         <plugins>
