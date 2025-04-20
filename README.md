@@ -10,8 +10,8 @@ The following commands are for building and running the application using Docker
 
 **Build the Docker image:**
 
-docker build -t demo-app .
-docker run -p 8080:8080 demo-app
+docker build -t semantic-store .
+docker run -p 8585:8080 semantic-store
 
 **Build the application:**
 
