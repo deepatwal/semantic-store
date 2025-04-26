@@ -13,8 +13,6 @@ java {
     }
 }
 
-    
-    
 repositories {
     mavenCentral()
 }
@@ -22,7 +20,17 @@ repositories {
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation("org.apache.jena:apache-jena-libs:5.3.0")
+    implementation("org.apache.jena:jena-text:5.3.0")
+    implementation("org.apache.jena:jena-fuseki-main:5.3.0")
+    implementation("org.apache.jena:jena-serviceenhancer:5.3.0")
+    implementation("org.apache.jena:jena-querybuilder:5.3.0")
+    implementation("org.apache.jena:jena-fuseki-ui:5.3.0")
+    implementation("org.apache.jena:jena-tdb2:5.3.0")
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation("org.apache.jena:jena-fuseki:5.3.0")
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
