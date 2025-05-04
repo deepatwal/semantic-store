@@ -1,0 +1,1 @@
+tdbloader2 --loc=/path/to/tdb-dataset data.nt
