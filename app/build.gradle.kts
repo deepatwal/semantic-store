@@ -23,6 +23,8 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+    implementation("org.apache.jena:apache-jena-libs:5.4.0")
+    implementation("org.apache.jena:jena-fuseki-main:5.4.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -34,7 +36,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.App"
+    mainClass = "org.example.FusekiServerStarter"
 }
 
 tasks.named<Test>("test") {
