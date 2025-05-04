@@ -21,7 +21,7 @@ public class SemanticStore {
             Model model = dataset.getDefaultModel();
 
             Resource resource = model.createResource("http://example.org/person/JohnDoe");
-            resource.addProperty(model.createProperty("http://example.org/ontology/name"), "John Doe");
+            resource.addProperty(model.createProperty("http://example.org/person/name"), "John Doe");
 
             dataset.commit();
             System.out.println("Triples successfully written to the dataset.");
