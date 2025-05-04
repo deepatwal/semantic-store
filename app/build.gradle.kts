@@ -24,8 +24,8 @@ dependencies {
     // This dependency is used by the application.
     implementation(libs.guava)
     implementation("org.apache.jena:apache-jena-libs:5.4.0") { isTransitive = true }
-    implementation("org.apache.jena:jena-fuseki-main:5.4.0")
-    implementation("org.apache.jena:jena-fuseki-ui:5.4.0")
+    // implementation("org.apache.jena:jena-fuseki-main:5.4.0")
+    // implementation("org.apache.jena:jena-fuseki-webapp:5.4.0")
     
 }
 
@@ -38,7 +38,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.FusekiServerStarter"
+    mainClass = "org.example.SemanticStore"
 }
 
 tasks.named<Test>("test") {
