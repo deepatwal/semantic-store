@@ -3,3 +3,5 @@
 
 # Ignore Gradle build output directory
 build
+# Ignore tdb2-data directory
+app/tdb2-data
