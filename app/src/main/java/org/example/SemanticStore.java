@@ -10,26 +10,18 @@ import org.apache.jena.tdb2.TDB2Factory;
 public class SemanticStore {
 
     public static void main(String[] args) {
-        // Path to the TDB2 storage directory
+
         String tdbDirectory = "C:/Users/deepa/data/workspace/github/TBD-storage";
+        String datasetName = "Dataset_04-05-2025";
 
-        // Connect to TDB2 dataset
-        Dataset dataset = TDB2Factory.connectDataset(tdbDirectory);
+        Dataset dataset = TDB2Factory.connectDataset(tdbDirectory + "/" + datasetName);
 
-        String datasetName = "MyDataset";
-
-        // --- WRITE TRIPLES ---
         dataset.begin(ReadWrite.WRITE);
         try {
             Model model = dataset.getDefaultModel();
 
-            // Create and add a new resource
             Resource resource = model.createResource("http://example.org/person/JohnDoe");
             resource.addProperty(model.createProperty("http://example.org/ontology/name"), "John Doe");
-
-            // Add optional metadata
-            model.add(model.createResource("http://example.org/metadata/datasetName"),
-                    model.createProperty("http://example.org/ontology/name"), datasetName);
 
             dataset.commit();
             System.out.println("Triples successfully written to the dataset.");
