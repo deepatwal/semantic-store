@@ -1,8 +1,10 @@
 package org.example;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.ReadWrite;
@@ -13,18 +15,22 @@ import org.apache.jena.tdb2.TDB2Factory;
 
 public class SemanticStore {
 
+    private static final Logger logger = Logger.getLogger(SemanticStore.class.getName());
+
     public static void main(String[] args) {
         Properties properties = new Properties();
-        try (FileInputStream fis = new FileInputStream("config.properties")) {
+        try (InputStream fis = SemanticStore.class.getResourceAsStream("/config.properties")) {
+            if (fis == null) {
+                throw new IOException("config.properties not found in the classpath");
+            }
             properties.load(fis);
         } catch (IOException e) {
-            System.err.println("Error loading configuration file: " + e.getMessage());
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error loading configuration file: ", e);
             return;
         }
 
-        String tdbDirectory = properties.getProperty("tdb.directory", "C:/Users/deepa/data/workspace/github/TBD-storage");
-        String datasetName = properties.getProperty("dataset.name", "Dataset_04-05-2025");
+        String tdbDirectory = properties.getProperty("tdb.directory");
+        String datasetName = properties.getProperty("dataset.name");
 
         Dataset dataset = TDB2Factory.connectDataset(tdbDirectory + "/" + datasetName);
 
@@ -34,13 +40,15 @@ public class SemanticStore {
 
             Resource resource = model.createResource("http://example.org/person/JohnDoe");
             resource.addProperty(model.createProperty("http://example.org/person/name"), "John Doe");
+            resource.addProperty(model.createProperty("http://example.org/person/age"), "30");
+            resource.addProperty(model.createProperty("http://example.org/person/email"), "john.doe@example.org");
+            resource.addProperty(model.createProperty("http://example.org/person/phone"), "123-456-7890");
 
             dataset.commit();
-            System.out.println("Triples successfully written to the dataset.");
+            logger.log(Level.INFO, "Triples successfully written to the dataset.");
         } catch (Exception e) {
             dataset.abort();
-            System.err.println("Error writing triples: " + e.getMessage());
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error writing triples: ", e);
         } finally {
             dataset.end();
         }
@@ -48,13 +56,12 @@ public class SemanticStore {
         try {
             dataset.begin(ReadWrite.READ);
             Model model = dataset.getDefaultModel();
-            System.out.println("\nReading all triples from the dataset:");
+            logger.log(Level.INFO, "Reading triples from the dataset...");
             for (Statement stmt : model.listStatements().toList()) {
-                System.out.println(stmt);
+                logger.log(Level.INFO, "Statement: {0}", stmt);
             }
         } catch (Exception e) {
-            System.err.println("Error reading triples: " + e.getMessage());
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error reading triples: ", e);
         } finally {
             dataset.end();
         }
