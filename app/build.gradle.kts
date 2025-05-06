@@ -16,13 +16,11 @@ repositories {
 }
 
 dependencies {
-    // Use JUnit Jupiter for testing.
+
     testImplementation(libs.junit.jupiter)
-
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    // This dependency is used by the application.
     implementation(libs.guava)
+
     implementation("org.apache.jena:apache-jena-libs:5.4.0") { isTransitive = true }
     // implementation("org.apache.jena:jena-fuseki-main:5.4.0")
     // implementation("org.apache.jena:jena-fuseki-webapp:5.4.0")
